@@ -38,7 +38,7 @@ def evaluate_model(model, X_train, y_train, X_test, y_test, model_name):
     plt.show()
     return accuracy
 
-# Tune Random Forest hyperparameters
+# Tune Random Forest hyperparameters and plotting the error
 def tune_random_forest(X_train, y_train, X_test, y_test):
     x = list(range(1, 11))
     error_values = []
