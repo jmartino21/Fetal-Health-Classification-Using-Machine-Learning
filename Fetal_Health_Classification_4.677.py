@@ -38,6 +38,31 @@ def evaluate_model(model, X_train, y_train, X_test, y_test, model_name):
     plt.show()
     return accuracy
 
+# Tune Random Forest hyperparameters
+def tune_random_forest(X_train, y_train, X_test, y_test):
+    x = list(range(1, 11))
+    error_values = []
+    
+    for d in [1, 2, 3, 4, 5]:
+        for N in range(1, 11):
+            rfc = RandomForestClassifier(n_estimators=N, max_depth=d, criterion='entropy', random_state=123)
+            y_pred = rfc.fit(X_train, y_train.ravel()).predict(X_test)
+            error_RFC = np.mean(y_test.reshape(-1) != y_pred)
+            error_values.append(error_RFC)
+    
+    error_rate_list = [error_values[i:i+10] for i in range(0, len(error_values), 10)]
+    
+    for i, y in enumerate(error_rate_list):
+        plt.plot(x, y, label=f'd={i+1}')
+    
+    plt.title("Graph of Depth over N values and their corresponding error rates")
+    plt.xlabel("N values (number of nodes in Random Forest Classifier)")
+    plt.ylabel("Error rate")
+    plt.xticks(x)
+    plt.grid(True)
+    plt.legend()
+    plt.show()
+
 # Main script execution
 if __name__ == "__main__":
     file_path = 'CTG - Raw Data.csv'  # Ensure this file is present
@@ -56,3 +81,6 @@ if __name__ == "__main__":
         results[name] = evaluate_model(model, X_train, y_train, X_test, y_test, name)
     
     print("Final Accuracy Scores:", results)
+    
+    # Hyperparameter tuning for Random Forest
+    tune_random_forest(X_train, y_train, X_test, y_test)
