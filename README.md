@@ -13,7 +13,7 @@ This project applies machine learning classification models to predict fetal hea
 ## Models Implemented
 - **Naive Bayes Classifier** (Gaussian Naive Bayes)
 - **Decision Tree Classifier**
-- **Random Forest Classifier**
+- **Random Forest Classifier** (Hyperparameter tuning included)
 
 ## Installation
 ### Prerequisites
@@ -37,11 +37,13 @@ python fetal_health_classification.py
 2. Splits the dataset into training and testing sets.
 3. Trains Naive Bayes, Decision Tree, and Random Forest models.
 4. Evaluates models using accuracy and confusion matrices.
-5. Displays results and comparison.
+5. Tunes Random Forest hyperparameters by testing various `n_estimators` values and graphing error rates.
+6. Displays results and comparison.
 
 ## Output
 - Accuracy scores for each classification model.
 - Confusion matrices visualizing model performance.
+- Hyperparameter tuning graph for Random Forest showing depth vs. number of estimators and corresponding error rates.
 
 ## License
 This project is open-source and available for modification and use.
